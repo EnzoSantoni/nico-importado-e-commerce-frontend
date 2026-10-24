@@ -7,13 +7,28 @@ const inputGroupStyles = "flex flex-col gap-1";
 const labelStyles = 'text-sm text-text-muted';
 
 
-export default function ProductForm({onSave, defaultValues, submitLabel, onCancel}) {
+
+
+export default function ProductForm({onSave, defaultValues, submitLabel, onCancel, categories}) {
     const {register, handleSubmit, reset, formState: {errors} } = useForm({defaultValues});
+    
 
     async function handleFormSubmit(data) {
-        data.price = +data.price;
-        data.createdAt = new Date(data.createdAt).getTime();
-        await onSave(data)
+        console.log(data)
+        const formData = new FormData()
+        formData.append("name", data.name);
+        formData.append("price", +data.price);
+        data.image?.length && formData.append("image", data.image[0]);
+
+        formData.append("createdAt", new Date(data.createdAt).getTime());
+        formData.append("category", data.category);
+        formData.append("description", data.description);
+
+
+        // data.image = data.image[0];
+        // data.price = +data.price;
+        // data.createdAt = new Date(data.createdAt).getTime();
+        await onSave(formData)
         reset()
     }
 
@@ -33,17 +48,17 @@ export default function ProductForm({onSave, defaultValues, submitLabel, onCance
                     </div>
                     <div className={inputGroupStyles}>
                         <label htmlFor="" className={labelStyles}>Imagen</label>
-                        <input className={inputStyles} {...register("image")} type="url" placeholder="Imagen"/>
+                        <input className={inputStyles} {...register("image")} type="file" accept="image/*"/>
                     </div>
                     <div className={inputGroupStyles}>
                         <label htmlFor="" className={labelStyles}>Categoria</label>
                         <select className={`${inputStyles} cursor-pointer`} {...register("category")} type="url">
-                            <option>Categoria</option>
-                            <option value="running">Running</option>
-                            <option value="moda">Moda</option>
-                            <option value="sports">Deportes</option>
-                            <option value="mountain">Montaña</option>
+                            <option value="">Seleccioná una categoría</option>
+                            {categories.map(c => {
+                                return <option className="capitalize" value={c._id} key={c._id}>{c.viewValue}</option>
+                            })}
                         </select>
+                        {errors.category?.type === 'required' && <span className={errorMessageStyles}>El campo es requerido</span>}
                     </div>
                     <div className={inputGroupStyles}>
                         <label htmlFor="" className={labelStyles}>Descripcion</label>

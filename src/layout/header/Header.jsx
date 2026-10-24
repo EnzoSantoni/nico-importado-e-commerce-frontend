@@ -1,11 +1,14 @@
 import { faBars, faCartShopping, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useOrder } from "../../context/OrderContext";
 import { useState } from "react";
+import { useUser } from "../../context/UserContext";
+
 
 export default function Header () {
-    const isAdmin = true;
+    const navigate = useNavigate();
+    const {user, logout} = useUser()
     const [ menuOpen, setMenuOpen ] = useState(false);
 
     const {toggleSidebarOrder, totalQuantity} = useOrder();
@@ -14,11 +17,11 @@ export default function Header () {
 
     const links = [
         {to: "/", title: 'Principal'},
-        {to: "/login", title: 'Login'},
         {to: "/contact", title: 'Contacto'},
         {to: "/about-us", title: 'Acerca de'},
         {to: "/register", title: 'Registro'},
-        ...(isAdmin ? [
+        
+        ...(user?.role === "ADMIN_ROLE" ? [
             {to: "/admin-product", title: 'Admin Product'},
             {to:"/admin-user", title:'Admin User'}] : [])
         
@@ -33,12 +36,13 @@ export default function Header () {
                     return <NavLink to={l.to} className={({isActive})  => linkStyles + (isActive ?  ' text-text' : ' text-text-muted')} key={l.to} onClick={() => setMenuOpen(!menuOpen)}>{l.title}</NavLink>
                 })}
             </nav>
-            
-            <button className="relative size-11 flex items-center justify-center rounded-md text-text hover:bg-surface-hover cursor-pointer transition-colors duration-200 text-xl" onClick={() => toggleSidebarOrder()}>
-                <FontAwesomeIcon icon={faCartShopping} />
-                {totalQuantity >= 1 && <span className="absolute -top-1 -right-1 min-w-5 h-5 px-1 flex items-center justify-center rounded-full bg-accent text-xs font-medium text-text-on-accent tabular-nums">{totalQuantity}</span>}
-            </button>
-
+            <div className="flex justify-center items-center">
+                {user ? <button className="px-4 py-3 lg:p-4 hover:text-text hover:bg-surface-hover lg:hover:bg-transparent text-text-muted transition-colors" onClick={() => logout()}>Logout</button> : <button className="px-4 py-3 lg:p-4 hover:text-text hover:bg-surface-hover lg:hover:bg-transparent transition-colors text-text-muted" onClick={() => navigate("/login")}>Login</button>}
+                <button className="relative size-11 flex items-center justify-center rounded-md text-text hover:bg-surface-hover cursor-pointer transition-colors duration-200 text-xl" onClick={() => toggleSidebarOrder()}>
+                    <FontAwesomeIcon icon={faCartShopping} />
+                    {totalQuantity >= 1 && <span className="absolute -top-1 -right-1 min-w-5 h-5 px-1 flex items-center justify-center rounded-full bg-accent text-xs font-medium text-text-on-accent tabular-nums">{totalQuantity}</span>}
+                </button>
+            </div>
         </header>
     )
 }
