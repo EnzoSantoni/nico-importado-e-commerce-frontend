@@ -1,8 +1,8 @@
-const URL = 'https://69f20a88b15130b973526bd8.mockapi.io/api'
 
 import { useEffect, useState } from "react";
 import ProductCard from "../product-card/ProductCard";
 import axios from "axios";
+const URL = import.meta.env.VITE_SERVER_URL;
 
 export default function ProductList() {
     // generar un estado para nuestros productos []
@@ -12,8 +12,7 @@ export default function ProductList() {
         async function getProducts() {
             try {
                 const response = await axios.get(`${URL}/products`);
-
-                setProducts(response.data)
+                setProducts(response.data.products)
             } catch (error) {
                 console.log(error)
             }
@@ -28,7 +27,7 @@ export default function ProductList() {
             <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-3">
                 {
                     products.map(prod => (
-                        <ProductCard key={prod.id} prod={prod}/>
+                        <ProductCard key={prod._id} prod={prod}/>
                     ))
                 }
             </div>

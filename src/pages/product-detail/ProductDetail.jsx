@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { useOrder } from "../../context/OrderContext";
 
-const URL = 'https://69f20a88b15130b973526bd8.mockapi.io/api';
+const URL = import.meta.env.VITE_SERVER_URL;
 
 export default function ProductDetail() {
     const [ product, setProduct ] = useState()
@@ -14,7 +14,8 @@ export default function ProductDetail() {
     async function getProductById(id) {
         try {
             const response = await axios.get(`${URL}/products/${id}`);
-            setProduct(response.data);
+            console.log(response)
+            setProduct(response.data.product);
         } catch (error) {
             console.log(error)
         } finally {
@@ -64,10 +65,10 @@ export default function ProductDetail() {
                 <Link to={'/'} className="self-start text-sm text-text-muted hover:text-text transition-colors">Volver</Link>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
                     <div className="aspect-4/5 overflow-hidden rounded-lg border border-borders bg-surface">
-                        <img className="w-full h-full object-cover" src={product.image} alt={product.name} />
+                        <img className="w-full h-full object-cover" src={`http://localhost:3000/images/prodcuts/${product.image}`} alt={product.name} />
                     </div>
                     <div className="flex flex-col gap-4 md:sticky md:top-8">
-                        <span className="text-xs font-medium uppercase tracking-wide text-text-muted">{product.category}</span>
+                        <span className="text-xs font-medium uppercase tracking-wide text-text-muted">{product.category?.name}</span>
                         <h1 className="font-heading text-3xl md:text-4xl text-text">{product.name}</h1>
                         <p className="text-3xl font-medium text-accent tabular-nums">{Number(product.price).toLocaleString('es-AR', {style: 'currency', currency: 'ARS'})}</p>
                         <button className="w-full py-3 rounded-md border border-accent bg-accent text-base font-medium text-text-on-accent hover:bg-accent-hover hover:border-accent-hover cursor-pointer transition-colors duration-200" onClick={() => addOrderItem(product)}>Añadir al carrito</button>
