@@ -1,29 +1,13 @@
-import { NavLink } from "react-router";
+import ProductList from "../../components/product-list/ProductList";
+import { useOrder } from "../../context/OrderContext";
 
 export default function Home() {
+    const { order } = useOrder();
 
     return (
         <>
             <h1>Principal</h1>
-            <div className="card">
-                Producto 1
-                <NavLink to='product-detail/1'>
-                    Ver mas
-                </NavLink>
-            </div>
-            <div className="card">
-                Producto 2
-                <NavLink to='product-detail/2'>
-                    Ver mas
-                </NavLink>
-            </div>
-            <div className="card">
-                Producto 3
-                <NavLink to='product-detail/3'>
-                    Ver mas
-                </NavLink>
-            </div>
-
+            <ProductList />
         </>
     )
 }

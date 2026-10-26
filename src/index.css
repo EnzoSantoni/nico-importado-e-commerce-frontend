@@ -62,8 +62,7 @@
   --text-9xl: 4.5rem;     /* 72px */
 
   
-  --animate-spining: glow 7s linear infinite;
-  --animate-spining-reverse: glow 11s linear infinite reverse;
+  --animate-spining: glow 8s linear infinite;
 }
 
 @keyframes glow {
