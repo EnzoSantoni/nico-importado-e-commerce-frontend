@@ -23,6 +23,7 @@ export default function UserProvider({children}) {
 
 
     }, [user, token])
+    
 
     async function login(data) {
         try {
@@ -52,6 +53,7 @@ export default function UserProvider({children}) {
         setToken('');
         navigate('/')
     }
+
 
     return (
         <UserContext.Provider value={{user, token, login, logout}}>
