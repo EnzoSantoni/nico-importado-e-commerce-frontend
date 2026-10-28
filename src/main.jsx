@@ -9,11 +9,11 @@ import UserProvider from './context/UserContext.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
-      <OrderProvider>
         <UserProvider>
-        <App />
+          <OrderProvider>
+            <App />
+          </OrderProvider>
         </UserProvider>
-      </OrderProvider>
     </Router>
   </StrictMode>,
 )

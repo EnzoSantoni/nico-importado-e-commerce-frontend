@@ -24,7 +24,7 @@ const useApi = () => {
             error => {
                 console.log(error)
                 // Desloguearlo si el error en la respuesta es un status 401
-                if(error.response.status === 401){
+                if(error.response?.status === 401){
                     // Mostrar un mensaje al usuario
                     Swal.fire({
                         title: "Error",
@@ -35,11 +35,12 @@ const useApi = () => {
                         logout()
                     })
                 }
+                return Promise.reject(error)
             }
         )
 
         return () => {
-            api.interceptors.request.eject(responseInterceptor)
+            api.interceptors.response.eject(responseInterceptor)
             api.interceptors.request.eject(requestInterceptor)
         }
     }, [token]);

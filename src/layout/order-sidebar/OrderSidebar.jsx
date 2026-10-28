@@ -4,8 +4,7 @@ import { faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function OrderSidebar() {
-    const { order, total, handleChangeQuantity, removeItem,sidebarToggle, toggleSidebarOrder, totalQuantity } = useOrder();
-
+    const { order, total, handleChangeQuantity, removeItem,sidebarToggle, toggleSidebarOrder, totalQuantity, postOrder, resetOrders } = useOrder();
     return (
         <>
             <div className={`fixed inset-0 z-10 bg-bg/60 transition-opacity duration-300 motion-reduce:transition-none ${sidebarToggle ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => toggleSidebarOrder()}>
@@ -47,8 +46,8 @@ export default function OrderSidebar() {
                 </div>
 
                 <div className="px-4 pb-4 flex flex-col gap-2">
-                    <button className="w-full py-2.5 rounded-md border border-accent bg-accent text-sm font-medium text-text-on-accent hover:bg-accent-hover hover:border-accent-hover cursor-pointer transition-colors duration-200">Finalizar compra</button>
-                    <button className="w-full py-2 rounded-md border border-borders text-sm text-text-muted hover:text-error hover:border-error cursor-pointer transition-colors duration-200">Vaciar orden</button>
+                    <button className="w-full py-2.5 rounded-md border border-accent bg-accent text-sm font-medium text-text-on-accent hover:bg-accent-hover hover:border-accent-hover cursor-pointer transition-colors duration-200" onClick={() => postOrder()}>Finalizar compra</button>
+                    <button className="w-full py-2 rounded-md border border-borders text-sm text-text-muted hover:text-error hover:border-error cursor-pointer transition-colors duration-200" onClick={() => resetOrders()}>Vaciar orden</button>
                 </div>
             </div>
         </>
