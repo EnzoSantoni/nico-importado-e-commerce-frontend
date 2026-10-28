@@ -1,11 +1,12 @@
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
 import { useEffect, useState, useRef } from "react";
 import Swal from "sweetalert2";
 import ProductForm from "../../components/ProductForm/ProductForm";
 import { formatTimestampToInputDate } from "../../service/utils/formateDates";
 import { useUser } from "../../context/UserContext";
+import useApi from "../../service/interceptor/Interceptor";
+import Pagination from "../../components/pagination/Pagination";
 
 
 const thStyles = 'px-4 py-3 text-xs font-medium uppercase tracking-wide text-text-muted';
@@ -13,18 +14,26 @@ const tdStyle = 'px-4 py-3 align-middle text-text';
 const URL = import.meta.env.VITE_SERVER_URL;
 const dialogStyles = 'm-auto w-full max-w-lg rounded-lg border border-borders bg-surface p-0 text-text opacity-0 scale-95 open:opacity-100 open:scale-100 starting:open:opacity-0 starting:open:scale-95 transition-[opacity,scale,display,overlay] transition-discrete duration-200 ease-out backdrop:bg-transparent open:backdrop:bg-bg/70 starting:open:backdrop:bg-transparent backdrop:transition-[background-color,display,overlay] backdrop:transition-discrete backdrop:duration-200';
 
+
 export default function AdminProduct() {
+    // Estados modal
+    const api = useApi()
     const [products, setProducts] = useState([]);
     const [editingProduct, setEditingProduct] = useState(null);
     const [ categories, setCategories] = useState([]);
     const { token } = useUser()
     const dialogRef = useRef(null)
+    // ! Estados para mi componente paginacion y peticion
+    const [totalItems, setTotalItems] = useState(0);
+    const [limitProduct, setLimitProduct] = useState(5);
 
-    async function getProducts () {
+    async function getProducts ({page = 0}) {
         try {
-            const response = await axios.get(`${URL}/products`);
+            const response = await api.get(`/products?limit=${limitProduct}&page=${page}`);
             
-            const { products } = response.data;
+            const { products, total } = response.data;
+
+            setTotalItems(total)
             setProducts(products);
 
         } catch (error) {
@@ -33,14 +42,14 @@ export default function AdminProduct() {
     }
 
     useEffect(() => {
-        getProducts();
+        getProducts({});
         getCategories();
-    }, [])
+    }, [limitProduct])
 
     async function getCategories() {
         try {
 
-            const response = await axios.get(`${URL}/categories`, {headers:{Authorization: token}});
+            const response = await api.get(`${URL}/categories`, {headers:{Authorization: token}});
 
             const categoriesDB = response.data.categories
 
@@ -52,11 +61,14 @@ export default function AdminProduct() {
 
     async function updateProduct(data) {
         try {
-            await axios.put(`${URL}/products/${editingProduct._id}`,
-                                                            data, 
-                                                            {headers:{Authorization: token}})
+
+            await api.put(`/products/${editingProduct._id}`, data)
+
+            // await axios.put(`${URL}/products/${editingProduct._id}`,
+            //                                                 data, 
+            //                                                 {headers:{Authorization: token}})
             //Cartel de exito para el usuario
-            getProducts();
+            getProducts({});
             dialogRef.current.close();
         } catch (error) {
             console.log(error)
@@ -65,11 +77,9 @@ export default function AdminProduct() {
 
     async function createProduct(product) {
         try {
-            const newProduct = await axios.post(`${URL}/products`,
-                product, 
-                {headers:{Authorization: token}});
+            const newProduct = await api.post(`/products`, product);
             console.log(newProduct)
-            getProducts()
+            getProducts({})
         } catch (error) {
             console.log(error)
         }
@@ -97,8 +107,8 @@ export default function AdminProduct() {
 
         if(result.isConfirmed) {
             try {
-                await axios.delete(`${URL}/products/${id}`, {headers:{Authorization: token}});
-                getProducts();
+                await api.delete(`/products/${id}`);
+                getProducts({});
             } catch (error) {
                 console.log(error)
                 Swal.fire({
@@ -179,6 +189,18 @@ export default function AdminProduct() {
                             })}
                         </tbody>
                     </table>
+                </div>
+                <div className="flex flex-col items-center gap-4 sm:grid sm:grid-cols-3 px-3">
+                    <label className="flex items-center gap-2 text-sm text-text-muted">
+                        Mostrar
+                        <select className="h-10 px-3 rounded-md border border-borders bg-bg text-sm text-text tabular-nums cursor-pointer outline-none focus:border-accent" onChange={(e) => setLimitProduct(+e.target.value)} value={limitProduct}>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="8">8</option>
+                        </select>
+                        por página
+                    </label>
+                    <Pagination totalItems={totalItems} loadPage={getProducts} limitProduct={limitProduct} key={limitProduct} movement={false} />
                 </div>
             </section>
             <dialog ref={dialogRef} onTransitionEnd={handleDialogClose} onClick={offModal} className={dialogStyles}

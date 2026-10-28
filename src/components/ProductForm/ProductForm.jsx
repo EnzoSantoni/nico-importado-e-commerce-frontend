@@ -1,4 +1,3 @@
-import { isCancel } from "axios";
 import { useForm } from "react-hook-form";
 
 const inputStyles = 'w-full px-3 py-2 rounded-md border bg-bg -text-sm text-text placeholder:text-text-muted outline-none focus: border-accent';
@@ -33,7 +32,7 @@ export default function ProductForm({onSave, defaultValues, submitLabel, onCance
     }
 
     return (
-        <form onSubmit={handleSubmit(handleFormSubmit)} className={`bg-surface ${!isCancel ? 'border border-borders' : ''} rounded-lg p-6 flex flex-col gap-4`}>
+        <form onSubmit={handleSubmit(handleFormSubmit)} className={`bg-surface ${!onCancel ? 'border border-borders' : ''} rounded-lg p-6 flex flex-col gap-4`}>
                     <div className={inputGroupStyles}>
                         <label htmlFor="" className={labelStyles}>Producto</label>
                         <input className={inputStyles} {...register("name", {required: true, minLength: 3, maxLength: 50})} type="text" placeholder="Nombre del producto" />

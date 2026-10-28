@@ -20,10 +20,10 @@ export const OrderProvider = ({ children }) => {
     //function agregar producto
     function addOrderItem(prod) {
         // Buscar en la orden si existe el producto y si existe aniadimos 1 a cantidad
-        const product = order.find(producto => producto.id === prod.id);
+        const product = order.find(producto => producto._id === prod._id);
 
         if(product) {
-            handleChangeQuantity(product.id, product.quantity + 1);
+            handleChangeQuantity(product._id, product.quantity + 1);
             
             return
         } else {
@@ -58,7 +58,7 @@ export const OrderProvider = ({ children }) => {
         const quantitySafe = Math.max(1, Math.floor( Number(quantity) || 1))
 
         const updatedOrder = order.map(item => {
-            if(item.id === id) {
+            if(item._id === id) {
                 return {...item, quantity: quantitySafe};
             }
         return item
@@ -86,7 +86,7 @@ export const OrderProvider = ({ children }) => {
             width: '24rem'
         }).then(result => {
             if(result.isConfirmed) {
-                const updOrder = order.filter(prod => prod.id !== id);
+                const updOrder = order.filter(prod => prod._id !== id);
                 setOrder(updOrder);
             }
         })

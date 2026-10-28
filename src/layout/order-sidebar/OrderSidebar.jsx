@@ -21,12 +21,12 @@ export default function OrderSidebar() {
                     <ul className="flex-1 overflow-y-auto px-4 divide-y divide-borders">
                         {order.map(product => {
                             return (
-                                <li className="flex items-center gap-3 py-3" key={product.id}>
-                                        <img className="size-10 shrink-0 rounded-md object-cover bg-surface-hover" src={product.image ?? 'https://img.icons8.com/bubbles/1200/product.jpg'} alt="Imagen del producto" />
+                                <li className="flex items-center gap-3 py-3" key={product._id}>
+                                        <img className="size-10 shrink-0 rounded-md object-cover bg-surface-hover" src={ product.image ? `http://localhost:3000/images/prodcuts/${product.image}` : 'https://img.icons8.com/bubbles/1200/pro'} alt="Imagen del producto" />
                                         <div className="flex-1 min-w-0 truncate text-sm text-text" title={product.name}>{product.name}</div>
                                         <div className="w-20 shrink-0 text-right text-sm text-text-muted tabular-nums">$ {product.price}</div>
-                                        <input type="number" value={product.quantity} className="w-12 h-8 shrink-0 rounded-md border border-borders bg-bg text-center text-sm text-text tabular-nums outline-none focus:border-accent" onChange={(evt) => handleChangeQuantity(product.id, evt.target.value)} min={1} />
-                                        <button className="size-8 shrink-0 flex items-center justify-center rounded-md text-text-muted hover:text-error hover:bg-surface-hover cursor-pointer transition-colors duration-200" title="Elminar producto" onClick={() => removeItem(product.id)}>
+                                        <input type="number" value={product.quantity} className="w-12 h-8 shrink-0 rounded-md border border-borders bg-bg text-center text-sm text-text tabular-nums outline-none focus:border-accent" onChange={(evt) => handleChangeQuantity(product._id, evt.target.value)} min={1} />
+                                        <button className="size-8 shrink-0 flex items-center justify-center rounded-md text-text-muted hover:text-error hover:bg-surface-hover cursor-pointer transition-colors duration-200" title="Elminar producto" onClick={() => removeItem(product._id)}>
                                             <FontAwesomeIcon icon={faTrash} />
                                         </button>
                                     </li>
