@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-const inputStyles = 'w-full px-3 py-2 rounded-md border bg-bg -text-sm text-text placeholder:text-text-muted outline-none focus: border-accent';
+const inputStyles = 'w-full px-3 py-2 rounded-md border bg-bg text-sm text-text placeholder:text-text-muted outline-none focus:border-accent';
 const errorMessageStyles = 'text-xs text-error';
 const inputGroupStyles = "flex flex-col gap-1";
 const labelStyles = 'text-sm text-text-muted';
