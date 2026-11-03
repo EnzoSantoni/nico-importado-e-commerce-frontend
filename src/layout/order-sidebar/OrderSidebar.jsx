@@ -13,7 +13,7 @@ export default function OrderSidebar() {
             <div className={`fixed top-0 right-0 bottom-0 z-20 w-full sm:w-100 flex flex-col overflow-hidden bg-surface border-l border-borders transition-transform duration-300 ease-in-out motion-reduce:transition-none ${sidebarToggle ? 'translate-x-0' : 'translate-x-full'}`} inert={!sidebarToggle}>
                 <div className="flex flex-1 flex-col overflow-hidden">
                     <div className="flex items-center justify-between px-4 py-5 border-b border-borders">
-                        <h2 className="ffont-heading text-xl text-text">Orden Actual:</h2>
+                        <h2 className="font-heading text-xl text-text">Orden Actual:</h2>
                         <FontAwesomeIcon icon={faXmark} className="size-8 flex items-center justify-center rounded-md text-text-muted hover:text-text hover:bg-surface-hover cursor-pointer transition-colors duration-200" onClick={() => toggleSidebarOrder()}/>
                     </div>
                     
@@ -25,7 +25,7 @@ export default function OrderSidebar() {
                                         <div className="flex-1 min-w-0 truncate text-sm text-text" title={product.name}>{product.name}</div>
                                         <div className="w-20 shrink-0 text-right text-sm text-text-muted tabular-nums">$ {product.price}</div>
                                         <input type="number" value={product.quantity} className="w-12 h-8 shrink-0 rounded-md border border-borders bg-bg text-center text-sm text-text tabular-nums outline-none focus:border-accent" onChange={(evt) => handleChangeQuantity(product._id, evt.target.value)} min={1} />
-                                        <button className="size-8 shrink-0 flex items-center justify-center rounded-md text-text-muted hover:text-error hover:bg-surface-hover cursor-pointer transition-colors duration-200" title="Elminar producto" onClick={() => removeItem(product._id)}>
+                                        <button className="size-8 shrink-0 flex items-center justify-center rounded-md text-text-muted hover:text-error hover:bg-surface-hover cursor-pointer transition-colors duration-200" title="Eliminar producto" onClick={() => removeItem(product._id)}>
                                             <FontAwesomeIcon icon={faTrash} />
                                         </button>
                                     </li>

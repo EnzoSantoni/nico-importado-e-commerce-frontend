@@ -52,7 +52,7 @@ export default function ProductDetail() {
     if(!product) {
         return(
             <div className="w-full max-w-6xl flex-1 mx-auto flex flex-col gap-6 justify-center items-center px-4 text-center">
-                <h1 className="font-headingtext-3xl md:text-4xl text-text">No se pudo encontrar el producto</h1>
+                <h1 className="font-heading text-3xl md:text-4xl text-text">No se pudo encontrar el producto</h1>
                 <p className="text-sm text-text-muted">Puede que lo hayan dado de baja o que el link no sea correcto.</p>
                 <Link to={'/'} className="px-5 py-2.5 rounded-md border border-accent bg-accent text-sm font-medium text-text-on-accent hover:bg-accent-hover hover:border-accent-hover transition-colors duration-200">Ver catálogo</Link>
             </div>
