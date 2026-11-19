@@ -1,34 +1,33 @@
-@import "tailwindcss"; 
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600&family=Inter:wght@400;500&display=swap');
-
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@600&family=Inter:wght@400;500&display=swap");
 
 @theme {
-  --color-oro-50: #FEF9E7;
-  --color-oro-100: #FDF1C2;
-  --color-oro-200: #FBE28A;
-  --color-oro-300: #F8D052;
-  --color-oro-400: #F4BE29;
-  --color-oro-500: #E8A50F;
-  --color-oro-600: #C4840B;
-  --color-oro-700: #9B650C;
-  --color-oro-800: #7C4F11;
-  --color-oro-900: #683F14;
-  --color-oro-950: #3C2107;
-  
-  --color-carbon-50: #F8F7F5;
-  --color-carbon-100: #EFEDE8;
-  --color-carbon-200: #DCD9D1;
-  --color-carbon-300: #BCB7AC;
-  --color-carbon-400: #918C81;
-  --color-carbon-500: #706B62;
-  --color-carbon-600: #57534B;
-  --color-carbon-700: #423F39;
-  --color-carbon-800: #2B2926;
-  --color-carbon-900: #1A1916;
-  --color-carbon-950: #0C0B0A;
+  --color-oro-50: #fef9e7;
+  --color-oro-100: #fdf1c2;
+  --color-oro-200: #fbe28a;
+  --color-oro-300: #f8d052;
+  --color-oro-400: #f4be29;
+  --color-oro-500: #e8a50f;
+  --color-oro-600: #c4840b;
+  --color-oro-700: #9b650c;
+  --color-oro-800: #7c4f11;
+  --color-oro-900: #683f14;
+  --color-oro-950: #3c2107;
 
-  --font-sans: Inter, system-ui, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: ui-monospace, 'Courier New', monospace;
+  --color-carbon-50: #f8f7f5;
+  --color-carbon-100: #efede8;
+  --color-carbon-200: #dcd9d1;
+  --color-carbon-300: #bcb7ac;
+  --color-carbon-400: #918c81;
+  --color-carbon-500: #706b62;
+  --color-carbon-600: #57534b;
+  --color-carbon-700: #423f39;
+  --color-carbon-800: #2b2926;
+  --color-carbon-900: #1a1916;
+  --color-carbon-950: #0c0b0a;
+
+  --font-sans: Inter, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "Courier New", monospace;
   --font-heading: Sora, system-ui, sans-serif;
 
   --color-bg: var(--color-carbon-950);
@@ -40,35 +39,33 @@
   --color-accent: var(--color-oro-500);
   --color-accent-hover: var(--color-oro-400);
   --color-text-on-accent: var(--color-oro-950);
-  --color-error: #E5484D;
-  --color-success: #46A758;
+  --color-error: #e5484d;
+  --color-success: #46a758;
 
   --leading-tight: 1;
   --leading-normal: 1.6;
   --leading-heading: 1.1;
 
-  --text-xs: 0.875rem;    /* 14px */
-  --text-sm: 1rem;        /* 16px */
-  --text-base: 1.125rem;  /* 18px */
-  --text-lg: 1.25rem;     /* 20px */
-  --text-xl: 1.5rem;      /* 24px */
-  --text-2xl: 1.75rem;    /* 28px */
-  --text-3xl: 2rem;       /* 32px */
-  --text-4xl: 2.25rem;    /* 36px */
-  --text-5xl: 2.625rem;   /* 42px */
-  --text-6xl: 3rem;       /* 48px */
-  --text-7xl: 3.5rem;     /* 56px */
-  --text-8xl: 4rem;       /* 64px */
-  --text-9xl: 4.5rem;     /* 72px */
+  --text-xs: 0.875rem; /* 14px */
+  --text-sm: 1rem; /* 16px */
+  --text-base: 1.125rem; /* 18px */
+  --text-lg: 1.25rem; /* 20px */
+  --text-xl: 1.5rem; /* 24px */
+  --text-2xl: 1.75rem; /* 28px */
+  --text-3xl: 2rem; /* 32px */
+  --text-4xl: 2.25rem; /* 36px */
+  --text-5xl: 2.625rem; /* 42px */
+  --text-6xl: 3rem; /* 48px */
+  --text-7xl: 3.5rem; /* 56px */
+  --text-8xl: 4rem; /* 64px */
+  --text-9xl: 4.5rem; /* 72px */
 
-  
   --animate-spining: glow 8s linear infinite;
 }
 
 @keyframes glow {
   0% {
-    transform:rotate(0deg) scale(1);
-
+    transform: rotate(0deg) scale(1);
   }
 
   50% {
