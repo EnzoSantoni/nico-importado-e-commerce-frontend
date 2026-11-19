@@ -1,10 +1,8 @@
 export default function removeDecimals(value) {
+  if (isNaN(value)) {
+    return;
+  }
 
-    if(isNaN(value)) {
-        return;
-    }
-
-    return Math.round(value * 100) / 100
-    // return +value.toFixed(2)
+  return Math.round(value * 100) / 100;
+  // return +value.toFixed(2)
 }
-

@@ -1,5 +1,3 @@
 export default function AdminUser() {
-    return (
-        <div>AdminUser</div>
-    )
+  return <div>AdminUser</div>;
 }
