@@ -1,0 +1,4 @@
+Inicio sesion: Login.jsx -> UserContext.login -> POST localhost:3000/api/login -> user.routes.js -> user.controller.js -> User y Token -> UserContext.jsx -> localStorage
+catálogo: Home.jsx -> ProductList.jsx -> GET localhost:3000/api/products?page=_&limit=_&category=* -> product.routes.js -> product.controller.js -> product.model.js -> Products, Total, limitProduct -> ProductList.jsx
+alta de producto: ProductForm.jsx -> AdminProduct.jsx -> Interceptor -> POST localhost:3000/api/products -> products.routes.js -> Middlewares = auth, isAdmin, upload, productValidation.validateProduct -> products.controller.js -> product.model.js -> newProduct
+orden de compra: OrderSidebar.jsx -> OrderContext.jsx -> Interceptor -> POST localhost:3000/api/orders -> order.routes.js -> Middleware = auth -> order.controller.js -> order.model.js -> newOrder
